@@ -19,7 +19,8 @@ L.LatLngGraticule = L.Layer.extend({
             {start: 4, end: 4, interval: 10},
             {start: 5, end: 7, interval: 5},
             {start: 8, end: 20, interval: 1}
-        ]
+        ],
+        pane: 'overlayPane',
     },
 
     initialize: function (options) {
@@ -64,7 +65,7 @@ L.LatLngGraticule = L.Layer.extend({
             this._initCanvas();
         }
 
-        map._panes.overlayPane.appendChild(this._container);
+        map._panes[this.options.pane].appendChild(this._container);
 
         map.on('viewreset', this._reset, this);
         map.on('move', this._reset, this);
