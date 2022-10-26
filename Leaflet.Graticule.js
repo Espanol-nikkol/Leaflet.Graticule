@@ -79,7 +79,7 @@ L.LatLngGraticule = L.Layer.extend({
     },
 
     onRemove: function (map) {
-        map.getPanes().overlayPane.removeChild(this._container);
+        map._panes[this.options.pane].removeChild(this._container);
 
         map.off('viewreset', this._reset, this);
         map.off('move', this._reset, this);
@@ -103,13 +103,13 @@ L.LatLngGraticule = L.Layer.extend({
 
     bringToFront: function () {
         if (this._canvas) {
-            this._map._panes.overlayPane.appendChild(this._canvas);
+            this._map._panes[this.options.pane].appendChild(this._canvas);
         }
         return this;
     },
 
     bringToBack: function () {
-        var pane = this._map._panes.overlayPane;
+        var pane = this._map._panes[this.options.pane];
         if (this._canvas) {
             pane.insertBefore(this._canvas, pane.firstChild);
         }
